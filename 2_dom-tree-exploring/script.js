@@ -10,6 +10,7 @@ function test1() {
   // TODO: item3의 부모 요소 찾기
   const item3 = document.getElementById("item3");
   // const parent =
+  const parent = item3.parentElement;
 
   console.log("item3의 부모:", parent.id); // item3의 부모: main-menu
 
@@ -31,6 +32,7 @@ function test2() {
   const menu = document.getElementById("main-menu");
   // TODO: menu 의 모든 자식 찾기. (hint: children)
   //   const children =
+  const children = menu.children;
 
   console.log("자식 개수:", children.length);
 
@@ -41,6 +43,9 @@ function test2() {
   console.log("마지막 자식:", menu.lastElementChild.textContent);
 
   // TODO: children을 순회하며 아래 예상 출력 결과와 똑같이 맞춰보세요
+  [...children].forEach((child, index) =>
+    console.log(`${index + 1}번째 자식: ${child.textContent}`),
+  );
 
   // 예상 출력 결과
   //   1번째 자식: 메뉴 1
@@ -64,6 +69,8 @@ function test3() {
   //   TODO: item3 의 이전/다음 형제를 찾기 위하여 아래 코드를 주석풀고 완성해보세요
   //   const prev = item3.
   //   const next = item3.
+  const prev = item3.previousElementSibling;
+  const next = item3.nextElementSibling;
 
   console.log("이전 형제:", prev.textContent); // 이전 형제: 메뉴 2
   console.log("다음 형제:", next.textContent); // 다음 형제: 메뉴 4
@@ -86,15 +93,18 @@ function test4() {
   const item3 = document.getElementById("item3");
   // TODO: item3 에서 .container 찾기 위하여 아래 코드를 주석풀고 완성해보세요
   //   const container =
+  const container = item3.closest(".container");
 
   console.log("가장 가까운 .container:", container);
 
   // TODO: 가장 가까운 .menu 찾기
   //   const menu =
+  const menu = item3.closest(".menu");
   console.log("가장 가까운 .menu:", menu.id); // 가장 가까운 .menu: main-menu
 
   // TODO: 자기 자신도 포함도 포함되는 지 확인하기 위하여 아래 코드를 주석풀고 완성해보세요
   //   const self =
+  const self = item3.closest("#item3");
   console.log("자기 자신:", self.id); // 자기 자신: item3
 
   console.log("조상 찾기 완료");
