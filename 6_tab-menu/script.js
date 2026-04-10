@@ -142,15 +142,18 @@ function test6() {
     tab.addEventListener("click", () => {
       // TODO: tab의 dataset에서 tab 값을 읽어 targetTab 변수에 저장하세요
       // const targetTab =
-
+      const targetTab = tab.dataset.tab;
       // TODO: 모든 탭 버튼에서 "active" 클래스를 제거하세요 (tabs를 forEach로 순회)
-
+      tabs.forEach((tab) => tab.classList.remove("active"));
       // TODO: 모든 탭 콘텐츠에서 "active" 클래스를 제거하세요 (contents를 forEach로 순회)
-
+      contents.forEach((content) => content.classList.remove("active"));
       // TODO: 클릭한 tab에 "active" 클래스를 추가하세요
-
+      tab.classList.add("active");
       // TODO: data-content 값이 targetTab과 일치하는 콘텐츠에 "active" 클래스를 추가하세요
       // hint: document.querySelector(`[data-content="${targetTab}"]`)
+      document
+        .querySelector(`[data-content="${targetTab}"]`)
+        .classList.add("active");
 
       console.log("활성 탭:", targetTab);
     });
