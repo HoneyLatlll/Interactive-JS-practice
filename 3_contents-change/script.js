@@ -10,6 +10,7 @@ function test1() {
   const greeting = document.getElementById("greeting");
 
   // TODO: greeting 요소의 textContent를 콘솔에 출력하세요
+  console.log("greeting textContent:", greeting.textContent);
   // console.log("greeting textContent:", );
   // 예상 출력: "안녕하세요 코드잇 여러분!"
   // (HTML 태그(<strong>)는 제외되고 순수 텍스트만 나옵니다)
@@ -17,10 +18,12 @@ function test1() {
   const hiddenText = document.getElementById("hidden-text");
 
   // TODO: hiddenText 요소의 textContent를 콘솔에 출력하세요
+  console.log("hiddentText textContent:", hiddenText.textContent);
   // console.log("hiddenText textContent:", );
   // 예상 출력: 숨겨진 텍스트(display: none)도 포함되어 출력됩니다
 
   // TODO: hiddenText 요소의 innerText를 콘솔에 출력하고, textContent와 비교해보세요
+  console.log("hiddentText innerText:", hiddenText.innerText);
   // console.log("hiddenText innerText:", );
   // 예상 출력: innerText는 화면에 보이는 텍스트만 출력합니다
 
@@ -36,19 +39,22 @@ function test2() {
 
   // TODO: #avatar 요소의 textContent를 "J"로 변경하세요
   // const avatar = document.getElementById("avatar");
-
+  const avatar = document.getElementById("avatar");
+  avatar.textContent = "J";
   // TODO: #user-name 요소의 textContent를 "김코딩"으로 변경하세요
   // const userName = document.getElementById("user-name");
-
+  const userName = document.getElementById("user-name");
+  userName.textContent = "김코딩";
   // TODO: #user-bio 요소의 textContent를 "JavaScript를 열심히 배우고 있습니다!"로 변경하세요
   // const userBio = document.getElementById("user-bio");
-
+  const userBio = document.getElementById("user-bio");
+  userBio.textContent = "JavaScript를 열심히 배우고 있습니다!";
   // TODO: #counter 요소의 textContent를 "현재 카운트: 42"로 변경하세요
-  // const counter = document.getElementById("counter");
-
+  const counter = document.getElementById("counter");
+  counter.textContent = "현재 카운트:42";
   // 아래 줄의 주석을 풀어 결과를 확인하세요
-  // console.log("이름:", userName.textContent);
-  // console.log("소개:", userBio.textContent);
+  console.log("이름:", userName.textContent);
+  console.log("소개:", userBio.textContent);
 
   console.log("textContent 쓰기 완료");
 }
@@ -61,12 +67,13 @@ function test3() {
   console.log("\n=== 테스트 3: innerHTML 읽기 ===");
 
   const noticeContent = document.getElementById("notice-content");
-
+  console.log("innerHTML:", noticeContent.innerHTML);
   // TODO: noticeContent 요소의 innerHTML을 콘솔에 출력하세요
   // console.log("innerHTML:", );
   // 예상 출력: HTML 태그(<p>, <strong>, <em>)가 포함된 문자열이 출력됩니다
 
   // TODO: noticeContent 요소의 textContent도 출력하고, innerHTML과 비교해보세요
+  console.log("textContent:", noticeContent.textContent);
   // console.log("textContent:", );
   // 예상 출력: HTML 태그 없이 순수 텍스트만 출력됩니다
 
@@ -88,6 +95,35 @@ function test4() {
   // 상품 3: 이름 "마우스", 가격 "45,000원", 설명 "무선 마우스"
   //
   // hint: 아래와 같은 HTML 구조를 사용하세요 (템플릿 리터럴 `` 활용)
+  // productList.innerHTML = `<div class="product">
+  //   <div class="product-name">상품 1: 이름 "노트북"</div>
+  //   <div class="product-price">가격 "1,200,000원"</div>
+  //   <div class="product-desc">설명 "고성능 노트북"</div>
+  // </div><div class="product">
+  //   <div class="product-name">이름 "키보드"</div>
+  //   <div class="product-price">"89,000원"</div>
+  //   <div class="product-desc">"기계식 키보드"</div>
+  // </div><div class="product">
+  //   <div class="product-name">마우스</div>
+  //   <div class="product-price">45,000원</div>
+  //   <div class="product-desc">무선 마우스</div>
+  // </div>`;
+  const pList = [
+    {
+      이름: "노트북",
+      가격: "1,200,000원",
+      설명: "고성능 노트북",
+    },
+    { 이름: "키보드", 가격: "89,000원", 설명: "기계식 키보드" },
+    { 이름: "마우스", 가격: "45,000원", 설명: "무선 마우스" },
+  ];
+
+  productList.innerHTML = pList
+    .map(
+      (p) =>
+        `<div class="product"><div class="product-name">${p.이름}</div><div class="product-price">${p.가격}</div><div class="product-desc">${p.설명}</div></div>`,
+    )
+    .join("");
   // <div class="product">
   //   <div class="product-name">상품이름</div>
   //   <div class="product-price">가격</div>
@@ -111,13 +147,13 @@ function test5() {
 
   // TODO: resultText 요소에 htmlString을 textContent로 설정
   // (HTML 태그가 문자 그대로 화면에 보여야 합니다)
-
+  resultText.textContent = htmlString;
   // TODO: resultHtml 요소에 htmlString을 innerHTML로 설정
   // (HTML 태그가 해석되어 굵은 글씨, 기울임 글씨로 보여야 합니다)
-
+  resultHtml.innerHTML = htmlString;
   // 아래 주석을 풀어 두 결과를 비교해보세요
-  // console.log("textContent 결과:", resultText.textContent);
-  // console.log("innerHTML 결과:", resultHtml.innerHTML);
+  console.log("textContent 결과:", resultText.textContent);
+  console.log("innerHTML 결과:", resultHtml.innerHTML);
 
   console.log("비교 완료");
 }
