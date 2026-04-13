@@ -17,6 +17,9 @@ const result1 = document.getElementById("result1");
 // btnEvent.addEventListener("click", (e) => {
 //   result1.textContent = `타입: ${  }\n대상: ${  }\n태그: ${  }`;
 // });
+btnEvent.addEventListener("click", (e) => {
+  result1.textContent = `타입: ${e.type}\n대상: ${e.target.textContent}\n태그: ${e.target.tagName}`;
+});
 
 console.log("테스트 1: 이벤트 객체 확인 준비 완료");
 
@@ -33,6 +36,10 @@ const result2 = document.getElementById("result2");
 // trackArea.addEventListener("mousemove", (e) => {
 //   result2.textContent = `X: ${  }, Y: ${  }`;
 // });
+
+trackArea.addEventListener("mouseover", (e) => {
+  result2.textContent = `X:${e.clientX}, Y:${e.clientY}`;
+});
 
 console.log("테스트 2: 마우스 좌표 추적 준비 완료");
 
@@ -53,6 +60,10 @@ const result3 = document.getElementById("result3");
 //   keyDisplay.textContent =
 //   result3.textContent = `key: ${  }, code: ${  }`;
 // });
+keyInput.addEventListener("keydown", (e) => {
+  keyDisplay.textContent = e.key;
+  result3.textContent = `key: ${e.key}, code: ${e.code}`;
+});
 
 console.log("테스트 3: 키보드 이벤트 준비 완료");
 
@@ -71,6 +82,10 @@ const result4 = document.getElementById("result4");
 // safeLink.addEventListener("click", (e) => {
 //
 // });
+safeLink.addEventListener("click", (e) => {
+  e.preventDefault();
+  result4.textContent = `링크 이동이 방지되었습니다! (원래 주소: ${e.target.href})`;
+});
 
 console.log("테스트 4: preventDefault 준비 완료");
 
@@ -95,6 +110,10 @@ let useStopPropagation = false;
 //   logs.push("outer 클릭!");
 //   result5.textContent = logs.join("\n");
 // });
+outer.addEventListener("click", (e) => {
+  logs.push("outer 클릭!");
+  result5.textContent = logs.join("\n");
+});
 
 // TODO: inner에 "click" 이벤트를 등록하세요
 // logs 배열에 "inner 클릭!"을 push하고, result5의 textContent를 logs.join("\n")으로 업데이트
@@ -103,6 +122,11 @@ let useStopPropagation = false;
 //   logs.push("inner 클릭!");
 //   result5.textContent = logs.join("\n");
 // });
+
+inner.addEventListener("click", (e) => {
+  logs.push("inner 클릭!");
+  result5.textContent = logs.join("\n");
+});
 
 // TODO: bubbleBtn에 "click" 이벤트를 등록하세요
 // - useStopPropagation이 true이면 e.stopPropagation()을 호출
@@ -115,6 +139,14 @@ let useStopPropagation = false;
 //   logs.push("button 클릭!");
 //   result5.textContent = logs.join("\n");
 // });
+bubbleBtn.addEventListener("click", (e) => {
+  if (useStopPropagation) {
+    // TODO: 여기서 전파를 중단하세요
+    e.stopPropagation();
+  }
+  logs.push("button 클릭!");
+  result5.textContent = logs.join("\n");
+});
 
 // 로그 초기화 버튼 (제공)
 btnReset5.addEventListener("click", (e) => {
@@ -155,11 +187,23 @@ btnCloseModal.addEventListener("click", () => {
 
 // TODO: backdrop에 "click" 이벤트를 등록하세요
 // 클릭하면 backdrop의 "show" 클래스를 제거 (모달 닫기)
+backdrop.addEventListener("click", () => {
+  backdrop.classList.remove("show");
+});
 
 // TODO: modal에 "click" 이벤트를 등록하세요
 // e.stopPropagation()으로 모달 안쪽 클릭 시 backdrop으로 이벤트가 전파되지 않도록 방지
+modal.addEventListener("click", (e) => {
+  e.stopPropagation();
+});
 
 console.log("테스트 6: 모달 준비 완료");
+//아래와 같이 하는게 실무에서 더 많이 쓰임
+// document.getElementById("backdrop").addEventListener("click", (e) => {
+//         if (e.target === e.currentTarget) {
+//           console.log("모달 닫기");
+//         }
+//       });
 
 // ==========================================
 // 테스트 7: 이벤트 위임 (Event Delegation)
@@ -173,6 +217,11 @@ let todoCount = 3;
 // - e.target이 삭제 버튼(.delete-btn)인지 확인
 // - 맞으면 e.target의 부모 요소(li)를 삭제
 // hint: e.target.classList.contains("delete-btn")으로 확인
+delegateList.addEventListener("click", (e) => {
+  if (e.target.classList.contains("delete-btn")) {
+    e.target.parentElement.remove();
+  }
+});
 //
 // delegateList.addEventListener("click", (e) => {
 //   if (e.target.classList.contains("delete-btn")) {

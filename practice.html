@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form>
+      <!-- 폼태그안의 input button은 자동으로 type이 submit으로 -->
+      <input />
+      <button>제출</button>
+    </form>
+    <script>
+      const form = document.querySelector("form");
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+        console.log("폼 제출 방지됨");
+      });
+    </script>
+  </body>
+</html>

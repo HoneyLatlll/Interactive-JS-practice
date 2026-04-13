@@ -10,6 +10,9 @@ const result1 = document.getElementById("result1");
 // TODO: btnHello에 "click" 이벤트를 등록하세요
 // 클릭하면 result1의 textContent를 "안녕하세요! 버튼이 클릭되었습니다."로 변경
 // hint: btnHello.addEventListener("click", () => { ... });
+btnHello.addEventListener("click", () => {
+  result1.textContent = "안녕하세요! 버튼이 클릭되었습니다.";
+});
 
 console.log("테스트 1: 기본 클릭 이벤트 준비 완료");
 
@@ -25,9 +28,17 @@ let count = 0;
 
 // TODO: btnPlus에 "click" 이벤트를 등록하세요
 // 클릭하면 count를 1 증가시키고, countDisplay의 textContent를 count 값으로 업데이트
+btnPlus.addEventListener("click", () => {
+  count++;
+  countDisplay.textContent = count;
+});
 
 // TODO: btnMinus에 "click" 이벤트를 등록하세요
 // 클릭하면 count를 1 감소시키고, countDisplay의 textContent를 count 값으로 업데이트
+btnMinus.addEventListener("click", () => {
+  count--;
+  countDisplay.textContent = count;
+});
 
 console.log("테스트 2: 카운터 준비 완료");
 
@@ -41,6 +52,12 @@ const result3 = document.getElementById("result3");
 // TODO: btnMulti에 "click" 이벤트를 2개 등록하세요
 // 첫 번째: result3의 textContent를 "첫 번째 핸들러 실행!"으로 변경
 // 두 번째: 콘솔에 "두 번째 핸들러도 실행!"을 출력
+btnMulti.addEventListener("click", () => {
+  result3.textContent = "첫 번째 핸들러 실행!";
+});
+btnMulti.addEventListener("click", () => {
+  console.log("두 번째 핸들러도 실행!");
+});
 // hint: addEventListener를 2번 호출하면 됩니다 (둘 다 실행됨!)
 
 console.log("테스트 3: 여러 이벤트 등록 준비 완료");
@@ -54,12 +71,22 @@ const colorBox = document.getElementById("color-box");
 
 // 랜덤 색상을 생성하는 함수 (제공)
 const getRandomColor = () => {
-  const colors = ["#e74c3c", "#3498db", "#2ecc71", "#f39c12", "#9b59b6", "#1abc9c"];
+  const colors = [
+    "#e74c3c",
+    "#3498db",
+    "#2ecc71",
+    "#f39c12",
+    "#9b59b6",
+    "#1abc9c",
+  ];
   return colors[Math.floor(Math.random() * colors.length)];
-};
+}; //Math.floor는 정수만 반환
 
 // TODO: btnColor에 "click" 이벤트를 등록하세요
 // 클릭하면 colorBox의 배경색(style.backgroundColor)을 getRandomColor()의 반환값으로 변경
+btnColor.addEventListener("click", () => {
+  colorBox.style.backgroundColor = getRandomColor();
+});
 
 console.log("테스트 4: 색상 변경 준비 완료");
 
@@ -79,6 +106,19 @@ let isLiked = false;
 //   - isLiked가 true이면: likeCount를 1 증가, 버튼 텍스트를 "❤️"로, "liked" 클래스 추가
 //   - isLiked가 false이면: likeCount를 1 감소, 버튼 텍스트를 "🤍"로, "liked" 클래스 제거
 //   - likeCountEl의 textContent를 likeCount로 업데이트
+likeBtn.addEventListener("click", () => {
+  isLiked = !isLiked;
+  if (isLiked) {
+    likeCount++;
+    likeBtn.textContent = "❤️";
+    likeBtn.classList.add("liked");
+  } else {
+    likeCount--;
+    likeBtn.textContent = "🤍";
+    likeBtn.classList.remove("liked");
+  }
+  likeCountEl.textContent = likeCount;
+});
 
 console.log("테스트 5: 좋아요 토글 준비 완료");
 
@@ -92,6 +132,14 @@ const result6 = document.getElementById("result6");
 // TODO: btnCoupon에 "click" 이벤트를 등록하되, 한 번만 실행되도록 하세요
 // 클릭하면 result6의 textContent를 "쿠폰이 발급되었습니다! (SAVE10)"으로 변경
 // hint: addEventListener의 세 번째 인자로 { once: true }를 전달
+btnCoupon.addEventListener(
+  "click",
+  () => {
+    result6.textContent = "쿠폰이 발급되었습니다!";
+    console.log("한번만 되는지 체크");
+  },
+  { once: true },
+);
 
 console.log("테스트 6: 한 번만 실행 준비 완료");
 
@@ -104,6 +152,11 @@ const closeBtns = document.querySelectorAll(".close-btn");
 // TODO: closeBtns를 forEach로 순회하며 각 닫기 버튼에 "click" 이벤트를 등록하세요
 // 클릭하면 해당 버튼의 부모 요소(.notification)를 삭제 (remove)
 // hint: 버튼의 부모 요소는 btn.parentElement로 접근
+closeBtns.forEach((classBtn) => {
+  classBtn.addEventListener("click", () => {
+    classBtn.parentElement.remove();
+  });
+});
 
 console.log("테스트 7: 알림 닫기 준비 완료");
 
